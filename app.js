@@ -4,11 +4,12 @@ const mongoose = require("mongoose");
 
 const app = express()
 
+app.use('/api/auth', require('./routs/auth.routes'))
+
 const PORT = config.get('port') || 5000
 
 async function start() {
     try {
-        console.log(mongoose.connect)
         await mongoose.connect(config.get('mongoUri'),
             {
                 useNewUrlParser: true,
