@@ -1,0 +1,67 @@
+.footer {
+  padding: 2rem 0;
+  display: flex;
+  &__all-collapses {
+    display: flex;
+    flex: 0 0 50%;
+  }
+  &__logo {
+    margin-top: 0.6rem;
+  }
+  &__desc {
+    flex: 0 0 50%;
+  }
+  &__text {
+    font-family: 'Avenir',sans-serif;
+    font-style: normal;
+    color: #9C9C9C;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 126.5%;
+    margin-top: 1.6rem;
+  }
+  &__rights {
+    margin-top: 0.7rem;
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 27px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+}
+.footer-wrapper {
+  margin-top: 6rem;
+  background-color: black;
+}
+@media (max-width: 991px) {
+  .footer {
+    &__all-collapses {
+      flex: 0 0 40%;
+    }
+    &__desc {
+      flex: 0 0 60%;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    display: flex;
+    position: relative;
+    flex-direction: column-reverse;
+    align-items: center;
+    &__all-collapses {
+      max-width: 350px;
+      margin-top: 3rem;
+    }
+    &__desc {
+      max-width: 400px;
+    }
+    &__logo {
+      position: absolute;
+      top: 1rem;
+    }
+  }
+}

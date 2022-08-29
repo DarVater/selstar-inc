@@ -1,0 +1,35 @@
+
+/* --------------------START our-process START -----------------------------*/
+
+.our-process {
+  min-height: 300px;
+  padding-top: 1rem;
+}
+.our-process__decor-line img{
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.our-process__progress-point {
+  margin-top: 0.5rem;
+}
+
+.our-process__decor-2{
+  position: relative;
+  & img {
+    position: absolute;
+    margin-left: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .our-process__decor-2,
+  .our-process__decor-line {
+    display: none;
+  }
+  .our-process {
+    margin-top: 6rem;
+    text-align: center;
+  }
+}
+/* --------------------END our-process END -----------------------------*/

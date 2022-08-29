@@ -1,0 +1,59 @@
+
+
+.progress-point {
+  padding: 0 4rem;
+}
+
+.progress-point__ico {
+}
+
+.progress-point__title {
+  font-size: 24px;
+  font-weight: 800;
+  margin-top: 7px;
+}
+
+.progress-point__text {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.our-process__progress-point {
+  margin-top: 0.5rem;
+}
+
+
+@media (max-width: 1023px) {
+  .progress-point {
+    padding: 0 2rem;
+  }
+}
+
+.article--center {
+  text-align: center;
+}
+.article--center{
+  &:after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: calc(50% - 20px);
+  }
+}
+.article--blue{
+  &:after {
+    border-bottom-color: #3F85F4;
+  }
+}
+
+@media (max-width: 767px) {
+  .progress-point__ico{
+    display: flex;
+    justify-content: center;
+  }
+  .progress-point {
+    margin-top: 2rem;
+    padding: 0;
+  }
+}

@@ -1,0 +1,30 @@
+
+/* --------------------START about  START -----------------------------*/
+.about {
+  position: relative;
+  margin-top: 3.5rem;
+}
+.about__decor-zip img {
+  margin: 0.5rem 0 0 auto;
+}
+@media (max-width: 768px) {
+  .need-flex-column-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .article__title {
+    margin-top: 1rem;
+  }
+  .article__text {
+    margin: 1rem 0 1rem;
+  }
+}
+@media (max-width: 575px){
+  .about {
+    margin-top: 2rem;
+  }
+  .about__decor-zip {
+    display: none;
+  }
+}
+/* --------------------END about  END -----------------------------*/

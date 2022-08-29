@@ -1,0 +1,38 @@
+
+.service-card {
+  width: 218px;
+  background: #FFFFFF;
+  box-shadow: 2px 10px 54px 29px rgba(100, 118, 147, 0.05);
+  border-radius: 10px;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  box-sizing: content-box;
+  &__icon {
+    display: flex;
+    justify-content: center;
+  }
+  &__title {
+    font-size: 14px;
+    margin-top: 0.8rem;
+    font-family: 'Gilroy', sans-serif;
+  }
+  &__text {
+    margin-top: 0.2rem;
+    font-size: 14px;
+  }
+}
+
+.service-card-wrapper {
+  display: inline-block;
+  margin:  0 0 1.5rem 0;
+
+  &:nth-child(2n) .service-card {
+    overflow: hidden;
+    margin: 2.2rem  0 0 1.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .service-card {
+    margin: 2.5rem  0 0 ;
+  }
+}

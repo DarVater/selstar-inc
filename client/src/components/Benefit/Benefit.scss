@@ -1,0 +1,27 @@
+
+/* --------------------START Benefit START -----------------------------*/
+
+.benefit {
+  display:  inline-block;
+  text-align: center;
+  margin-right: 1.2rem;
+  line-height: 2rem;
+  margin-top: 1.5rem;
+  &__ico img {
+    display: inline;
+    padding-right:  0.5rem;
+  }
+}
+.benefit__content {
+  display: inline-block;
+  border: 1px solid #BDBDBD;
+  border-radius: 20px;
+  padding: 0.2rem 1.1rem;
+}
+@media (max-width: 768px) {
+  .benefit {
+    display: block;
+  }
+}
+
+/* --------------------END Benefit END -----------------------------*/

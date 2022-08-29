@@ -1,0 +1,27 @@
+.header {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+}
+
+.header button {
+  padding: 0.4rem 2rem;
+  border-radius: 10px;
+}
+@media (max-width: 540px){
+  .header{
+    display: flex;
+    flex-direction: column;
+  }
+  .header img {
+    margin: 22px auto 0;
+    width: 89px;
+  }
+  .header nav{
+    padding: 0;
+  }
+  .header button {
+    display: none;
+  }
+}

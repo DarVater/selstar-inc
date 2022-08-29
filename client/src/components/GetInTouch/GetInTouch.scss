@@ -1,0 +1,40 @@
+.get-in-touch {
+  position: relative;
+  &__decor2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &__decor1 {
+    position: absolute;
+    bottom: 4rem;
+    right: 0;
+  }
+  &__submit {
+    text-align: center;
+    margin: 4rem auto 0;
+    button{
+      padding: 0.7rem 4rem;
+      border-radius: 10px;
+    }
+  }
+}
+.article--green{
+  &:after {
+    border-bottom-color: #32A952;
+  }
+}
+@media (max-width: 1023px) {
+  .get-in-touch__decor2 img{
+    margin-left: -50%;
+  }
+}
+@media (max-width: 768px) {
+  .get-in-touch {
+    margin-top: 3rem;
+    &__decor1,
+    &__decor2{
+      display: none;
+    }
+  }
+}
