@@ -15,9 +15,11 @@ router.post(
             .isLength({min: 6}),
 
     ],
-    async (rec, res) =>{
+    async (req, res) =>{
         try {
+            console.log(req.body)
             const errors = validationResult(req)
+            console.log(errors)
             if (!errors.isEmpty()){
                 return res.status(400).json({
                     errors: errors.array(),
@@ -30,6 +32,7 @@ router.post(
             if (candidate) {
                 return res.status(400).json({message: "Such user already used!"})
             }
+            console.log(111111111)
             const hashedPassword = await bcrypt.hash(password, 12)
             const user = new User({email, password: hashedPassword})
 
@@ -50,7 +53,8 @@ router.post(
         check('email', 'Type correct email!').normalizeEmail().isEmail(),
         check('password', 'type password').exists()
     ],
-    async (rec, res) =>{
+    async (req, res) =>{
+        console.log(req.body)
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()){
@@ -66,9 +70,10 @@ router.post(
                 return res.status(400).json({message: "Such user not fined!"})
             }
             const isMatch = await  bcrypt.compare(password, user.password)
-            if (isMatch) {
+            if (!isMatch) {
                 return res.status(400).json({message: "Wrong password!"})
             }
+            console.log(password, user.password)
             const token = jwt.sign(
                 {userId: user.id },
                 config.get('jwtSecret'),

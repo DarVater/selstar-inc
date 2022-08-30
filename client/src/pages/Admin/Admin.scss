@@ -1,0 +1,8 @@
+.navAdmin {
+
+  .nav-item{
+    &:after {
+      display: none;
+    }
+  }
+}

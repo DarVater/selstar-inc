@@ -24,7 +24,7 @@ const Performance = () => {
                             <ButtonStart>Get Started Today!</ButtonStart>
                         </div>
                         <div className="col-sm-6">
-                            <a className="performance__google-partner" href="client/src/Pages/Landing/Landing#">
+                            <a className="performance__google-partner" href="client/src/pages/Landing/Landing#">
                                 <img src={googlePartner} alt="google partner"/>
                             </a>
                         </div>

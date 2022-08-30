@@ -3,6 +3,9 @@ import './Footer.scss'
 import logoImg from './img/logo_white.png'
 import CollapseCustom from "../UI/CollapseCustom/CollapseCustom";
 
+import {useNavigate} from "react-router-dom";
+import {ADMIN_ROUTE, LOGIN_ROUTE, LENDING_ROUTE} from "../../utils/consts";
+
 const allCollapsesList = [
     {
         title: 'Navigation',
@@ -33,6 +36,7 @@ const allCollapsesList = [
 ]
 
 const Footer = () => {
+    const navigate = useNavigate()
     return (
         <div className={"footer-wrapper"}>
             <div className={"container"}>
@@ -46,17 +50,17 @@ const Footer = () => {
                             sodales
                             consequat. Lorem ipsum dolor sit amet.
                         </p>
-                        <p className={"footer__rights"}>
-                            © 2021. all rights reserved
+                        <p className={"footer__rights"}
+                            onClick={() => navigate(LOGIN_ROUTE)} >© 2021. all rights reserved
                         </p>
                     </div>
                     <div className="row  footer__all-collapses">
                         {allCollapsesList.map((item) =>
-                            <div className="col-lg-4">
-                            <CollapseCustom
-                            title={item.title}
-                            list={item.list}
-                            ></CollapseCustom>
+                            <div key={item.title}className="col-lg-4">
+                                <CollapseCustom
+                                title={item.title}
+                                list={item.list}
+                                ></CollapseCustom>
                             </div>
                         )}
                     </div>

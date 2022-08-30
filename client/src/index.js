@@ -10,6 +10,7 @@ import { createRoot } from "react-dom/client";
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
+console.log(111111111111)
 root.render(
     <StrictMode>
         <App />

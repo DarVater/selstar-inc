@@ -96,8 +96,17 @@ module.exports = {
         }),
     ],
     devServer: {
-        port: 3003,
+        port: 3000,
         hot: true,
+        historyApiFallback: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                router: () => 'http://localhost:5000',
+                logLevel: 'debug' /*optional*/
+            }
+        }
+
     },
     mode: production ? 'production' : 'development',
 
