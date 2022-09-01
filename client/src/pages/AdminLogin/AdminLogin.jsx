@@ -13,6 +13,7 @@ const AdminLogin = () => {
         email: '',
         password:''
     })
+    console.log(auth)
     const errorTeg = useRef()
     useEffect(() => {
         if (error) {

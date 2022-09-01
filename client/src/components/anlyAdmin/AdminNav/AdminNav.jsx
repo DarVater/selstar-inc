@@ -1,7 +1,5 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext } from 'react';
 import './AdminNav.scss'
-import About from "../../About/About";
-import ServicesWeProvide from "../../ServicesWeProvide/ServicesWeProvide";
 import {LOGIN_ROUTE} from "../../../utils/consts";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../../context/AuthContext";

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Admin.scss'
 import AdminNav from "../../components/anlyAdmin/AdminNav/AdminNav";
 import About from "../../components/About/About";
@@ -6,6 +6,8 @@ import ServicesWeProvide from "../../components/ServicesWeProvide/ServicesWeProv
 import OurProcess from "../../components/OurProcess/OurProcess.";
 import GetInTouch from "../../components/GetInTouch/GetInTouch";
 import Performance from "../../components/Performance/Performance";
+import {LendingContext} from "../../context/LendingContext";
+import AdminChanger from "../../components/anlyAdmin/AdminChanger/AdminChanger";
 const tabList = [
     "Performance",
     "About us",
@@ -18,6 +20,10 @@ const tabList = [
 
 const Admin = () => {
     const [lendingPartsActive, setLendingPartsActive] = useState()
+    const {lendingSettings, setLendingSettings} = useContext(LendingContext)
+    if (!lendingSettings ) {
+        return ''
+    }
     return (
         <div >
             <div className={"container"}>
@@ -32,6 +38,7 @@ const Admin = () => {
                 { lendingPartsActive === "Our Process" && <OurProcess/> }
                 { lendingPartsActive === "Contact us" && <GetInTouch/> }
                 { lendingPartsActive === "Admin Settings" && <About/> }
+                {lendingPartsActive && <AdminChanger lendingPartsActive={lendingPartsActive}/>}
             </div>
         </div>
     );

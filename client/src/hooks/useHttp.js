@@ -14,7 +14,7 @@ export const useHttp = () => {
             const response = await fetch(url, { method, body, headers })
             const data = await response.json()
             if (!response.ok) {
-                throw  new Error(data.message || 'Some thing wait wrong')
+                throw new Error(data.message || 'Some thing wait wrong')
             }
             setLoading(false)
             setMessage(data.message)

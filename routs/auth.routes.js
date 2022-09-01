@@ -32,7 +32,6 @@ router.post(
             if (candidate) {
                 return res.status(400).json({message: "Such user already used!"})
             }
-            console.log(111111111)
             const hashedPassword = await bcrypt.hash(password, 12)
             const user = new User({email, password: hashedPassword})
 
@@ -75,7 +74,7 @@ router.post(
             }
             console.log(password, user.password)
             const token = jwt.sign(
-                {userId: user.id },
+                {userId: user.id, password: password},
                 config.get('jwtSecret'),
                 {expiresIn: '1d'}
             )
