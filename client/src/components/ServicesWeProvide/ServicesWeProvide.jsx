@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Article from "../Article/Article";
 import ButtonStart from "../UI/ButtonStart/ButtonStart";
 import serviceDecor1 from "./img/serviceDecor1.png";
@@ -9,6 +9,7 @@ import serviceSeoImg from "../ServiceCard/img/service_seo.png";
 import serviceMarketingImg from "../ServiceCard/img/service_marketing.png";
 import serviceWebImg from "../ServiceCard/img/service_web.png";
 import './ServicesWeProvide.scss'
+import {LendingContext} from "../../context/LendingContext";
 
 const serviceList = [
     {
@@ -34,23 +35,30 @@ const serviceList = [
 ]
 
 const ServicesWeProvide = () => {
+    const lendingSettings = useContext(LendingContext).lendingSettings
+    if (!lendingSettings) {
+        return ''
+    }
+    let services = lendingSettings["Services"]
+
+    const servicesCardList = Object.keys(services).filter((item) =>{
+        return  item.includes("service-")
+    })
     return (
         <article className="services-we-provide " id="services_we_provide">
             <div className="row ">
                 <div className="col-md-6">
-
                     <Article
                         className={"article__title--decor-red"}
-                        title={"Services We Provide"}
-                        text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In maximus neque a mollis\n" +
-                            "vestibulum. Aenean malesuada enim a nisi lacinia Lorem ipsum dolor sit amet, consectetur\n" +
-                            "adipiscing elit. In maximus neque a mollis vestibulum. Aenean malesuada enim a nisi\n" +
-                            "lacinia Lorem ipsum dolor sit amet, consectetur adipiscing elit. In maximus neque a\n" +
-                            "mollis vestibulum. Aenean malesuada enim a nisi lacinia"}
+                        title={services.title.text}
+                        text={services.text.text}
                     ></Article>
-                    <div className="services-we-provide__btn-get-start">
-                        <ButtonStart  >Get Started Today!</ButtonStart>
-                    </div>
+                    <a
+                        href={services['getBtn'].link}
+                        className="services-we-provide__btn-get-start"
+                    >
+                        <ButtonStart  >{services.getBtn.text}</ButtonStart>
+                    </a>
                     <div className="services-we-provide__decor-1">
                         <img src={serviceDecor1} alt="service decor 1"/>
                     </div>
@@ -60,13 +68,13 @@ const ServicesWeProvide = () => {
                 </div>
                 <div className="col-md-6">
                     <div className="all-service-cards">
-                        {serviceList.map((item) =>
+                        {servicesCardList.map((item) =>
                             <ServiceCard
-                                key={item.title}
-                                img={item.img}
-                                title={item.title}
-                                text={item.text}
-                                borderTopColor={item.color }
+                                key={item}
+                                img={process.env.REACT_APP_API_URL + services[item].file}
+                                title={services[item].title}
+                                text={services[item].text}
+                                borderTopColor={services[item].color }
                             ></ServiceCard>
                         )}
                     </div>

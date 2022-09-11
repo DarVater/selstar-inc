@@ -1,11 +1,30 @@
 const {Router} = require('express')
+const uuid = require('uuid')
+const path = require('path')
 const router = Router()
 const LendingData = require('../models/LendingData')
 const config = require('config')
-const {check, validationResult} = require("express-validator");
+const {check, validationResult, body} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+
+const checkToken = async (token) => {
+    console.log(token)
+    if (!token) {
+        return false
+    }
+    const decoded = jwt.verify(token, config.get('jwtSecret'))
+    const  userId  = decoded.userId
+    const  password  = decoded.password
+
+    const user = await User.findOne({userId})
+    if (!user) {
+        return false
+    }
+    const isMatch = await  bcrypt.compare(password, user.password)
+    return isMatch
+}
 
 // /api/data/lending
 router.get(
@@ -14,6 +33,39 @@ router.get(
         try {
             const lendingData = await LendingData.findOne()
             res.json(lendingData.data)
+        } catch (e) {
+            res.status(500).json({message: "Something veit wrong! Try agan"})
+        }
+    }
+)
+
+// /api/data/saveImage
+router.post(
+    '/saveImage',
+    async (req, res) =>{
+        try {
+
+            const isMatch = checkToken(req.body.token)
+            if (!isMatch) {
+                return res.status(400).json({message: "Wrong token!"})
+            }
+            const img = req.files["myFile"]
+            let fileName = uuid.v4() + '.' + img.name.split('.').pop()
+
+
+            const lendingData = await LendingData.findOne()
+
+            let newData = JSON.parse(lendingData.data)
+            newData[req.body.part][req.body.item].file = fileName
+            lendingData.data = JSON.stringify(newData)
+            img.mv(path.resolve(__dirname, '..', 'static', fileName))
+            await lendingData.save().then(savedDoc => {
+                res.json({newData, message: {acknowledged: true, savedDoc, fileName}})
+            }).catch( e => {
+                    console.log('Don\'t saved')
+                    res.json({newData, message: {acknowledged: false,  e} })
+                }
+            );
         } catch (e) {
             res.status(500).json({message: "Something veit wrong! Try agan"})
         }
@@ -32,23 +84,19 @@ router.post(
                     message: 'Wrong data through login!'
                 })
             }
+            if (req.files) {
+                const {img} = req.files
+            }
             const {token, lendingSettings } = req.body
-            const newData = lendingSettings
+            let changeData = lendingSettings
+            // changeData['header']['startBtn'].link =  '#'
 
-            if (!token) {
-                return res.status(401).json({message: NOT_LOGIN})
-            }
-            const decoded = jwt.verify(token, config.get('jwtSecret'))
-            const  userId  = decoded.userId
-            const  password  = decoded.password
 
-            const user = await User.findOne({userId})
-            if (!user) {
-                return res.status(400).json({message: "Such user not fined!"})
-            }
-            const isMatch = await  bcrypt.compare(password, user.password)
+            let newData = changeData // changeData lendingSettings
+            console.log(newData)
+            const isMatch = checkToken(body.token)
             if (!isMatch) {
-                return res.status(400).json({message: "Wrong password!"})
+                return res.status(400).json({message: "Wrong token!"})
             }
             const lendingData = await LendingData.findOne({});
             lendingData.data = JSON.stringify(newData)
@@ -68,6 +116,5 @@ router.post(
         }
     }
 )
-
 
 module.exports = router

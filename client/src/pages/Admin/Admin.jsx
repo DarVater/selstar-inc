@@ -8,7 +8,9 @@ import GetInTouch from "../../components/GetInTouch/GetInTouch";
 import Performance from "../../components/Performance/Performance";
 import {LendingContext} from "../../context/LendingContext";
 import AdminChanger from "../../components/anlyAdmin/AdminChanger/AdminChanger";
+import Header from "../../components/Header/Header";
 const tabList = [
+    "header",
     "Performance",
     "About us",
     "Services",
@@ -19,6 +21,7 @@ const tabList = [
 ]
 
 const Admin = () => {
+
     const [lendingPartsActive, setLendingPartsActive] = useState()
     const {lendingSettings, setLendingSettings} = useContext(LendingContext)
     if (!lendingSettings ) {
@@ -32,12 +35,14 @@ const Admin = () => {
                     setActive={setLendingPartsActive}
                     tabList={tabList}
                 ></AdminNav>
+                { lendingPartsActive === "header" && <Header/> }
                 { lendingPartsActive === "About us" && <About/> }
                 { lendingPartsActive === "Performance" && <Performance/> }
                 { lendingPartsActive === "Services" && <ServicesWeProvide/> }
                 { lendingPartsActive === "Our Process" && <OurProcess/> }
                 { lendingPartsActive === "Contact us" && <GetInTouch/> }
                 { lendingPartsActive === "Admin Settings" && <About/> }
+                { lendingPartsActive === "footer" && <Header/> }
                 {lendingPartsActive && <AdminChanger lendingPartsActive={lendingPartsActive}/>}
             </div>
         </div>

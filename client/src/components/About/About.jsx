@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import './About.scss'
 import Benefit from "../Benefit/Benefit";
 import decorZipImg from "./img/decorZip.svg";
@@ -10,12 +10,9 @@ import chartImg from "../Benefit/img/chart.png";
 import cashImg from "../Benefit/img/cash.png";
 import lockImg from "../Benefit/img/lock.png";
 import ButtonStart from "../UI/ButtonStart/ButtonStart";
+import {LendingContext} from "../../context/LendingContext";
 
 const benefitList = [
-    {
-        img: goodImg,
-        text: "Lorem ipsum Dolor Sit"
-    },
     {
         img: checkImg,
         text: "Lorem ipsum Dolor Sit"
@@ -39,12 +36,25 @@ const benefitList = [
 ]
 
 const About = () => {
+    const lendingSettings = useContext(LendingContext).lendingSettings
+    if (!lendingSettings) {
+        return ''
+    }
+    let AboutUs = lendingSettings["About us"]
+    const benefitList = Object.keys(AboutUs).filter((item) =>{
+        return  item.includes("benefit-")
+    })
+    console.log(benefitList)
     return (
         <article className="about " id="about">
             <div className="row need-flex-column-reverse">
                 <div className="col-md-6 ">
                     {benefitList.map((item) =>
-                        <Benefit key={item.text+item.img} text={item.text} img={item.img}></Benefit>
+                        <Benefit
+                            key={item}
+                            text={AboutUs[item].text}
+                            img={process.env.REACT_APP_API_URL + AboutUs[item].file}
+                        ></Benefit>
                     )}
                 </div>
                 <div className="col-md-6">
@@ -52,13 +62,9 @@ const About = () => {
                         <img src={decorZipImg} alt="about decor zip"/>
                     </div>
                     <Article
-                        title={"About"}
-                        text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In maximus neque a mollis\n" +
-                            "                vestibulum. Aenean malesuada enim a nisi lacinia Lorem ipsum dolor sit amet, consectetur\n" +
-                            "                adipiscing elit. In maximus neque a mollis vestibulum. Aenean malesuada enim a nisi\n" +
-                            "                lacinia Lorem ipsum dolor sit amet, consectetur adipiscing elit. In maximus neque a\n" +
-                            "                mollis vestibulum. Aenean malesuada enim a nisi lacinia"}
-                    ></Article>
+                        title={AboutUs.title.text}
+                        text={AboutUs.text.text}
+                    > </Article>
                 </div>
             </div>
         </article>

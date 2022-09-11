@@ -1,3 +1,28 @@
-.admin-settings__save-response {
-  margin-left: 1rem;
+.admin-settings {
+  & input {
+    display: inline-block;
+  }
+  &__save-response {
+    margin-left: 1rem;
+  }
+  &__props-group {
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid black;
+  }
+  &__label {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  &__input {
+    margin-top: 0.5rem;
+  }
+  &_one-props {
+    display: flex;
+  }
+  &__old-file {
+    margin-top: 1rem;
+
+  }
 }

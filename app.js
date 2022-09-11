@@ -1,11 +1,16 @@
 const express = require('express')
 const config = require('config')
 const mongoose = require("mongoose");
+const fileUpload = require('express-fileupload')
+const path = require("path");
 
 const app = express()
 
 app.use(express.json({ extended: true}))
 
+app.use(express.json())
+app.use(express.static(path.resolve(__dirname, 'static' )))
+app.use(fileUpload({}))
 app.use('/api/data', require('./routs/data.routes'))
 app.use('/api/auth', require('./routs/auth.routes'))
 

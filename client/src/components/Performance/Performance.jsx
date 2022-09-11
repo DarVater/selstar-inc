@@ -17,29 +17,36 @@ const Performance = () => {
             <div className="row">
                 <div className="col-md-5">
                     <h1 className="performance__title">
-                        {performance.title}
+                        {performance.title.text}
                     </h1>
                     <p className="performance__text">
-                        {performance.text}
+                        {performance.text.text}
                     </p>
                     <div className="performance__ui row">
+                        <a
+                            href={performance['startBtn'].link}
+                            className="col-sm-6"
+                        >
+                            <ButtonStart>{performance.startBtn.text}</ButtonStart>
+                        </a>
                         <div className="col-sm-6">
-                            <ButtonStart>{performance.startBtn}</ButtonStart>
-                        </div>
-                        <div className="col-sm-6">
-                            <a className="performance__google-partner" href="client/src/pages/Landing/Landing#">
-                                <img src={googlePartner} alt="google partner"/>
+                            <a
+                                href={performance['performance__google-partner'].link}
+                                className="performance__google-partner"
+                            >
+                                <img src={process.env.REACT_APP_API_URL  + performance['performance__google-partner'].file} alt="google partner"/>
                             </a>
                         </div>
                     </div>
                     <div className="performance__decor">
-                        <img src={performanceDecor} alt=""/>
+                        <img src={performanceDecor.file} alt=""/>
                     </div>
                 </div>
                 <div className="col-md-1">
                 </div>
                 <div className="col-md-6">
-                    <img className="performance__stat-img" src={statImg} alt="statistics"/>
+                    <img className="performance__stat-img" src={process.env.REACT_APP_API_URL +
+                        performance.performance__stat.file} alt="statistics"/>
                 </div>
             </div>
         </article>

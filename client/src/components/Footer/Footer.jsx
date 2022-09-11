@@ -56,7 +56,7 @@ const Footer = () => {
                     </div>
                     <div className="row  footer__all-collapses">
                         {allCollapsesList.map((item) =>
-                            <div key={item.title}className="col-lg-4">
+                            <div key={item.title} className="col-lg-4">
                                 <CollapseCustom
                                 title={item.title}
                                 list={item.list}

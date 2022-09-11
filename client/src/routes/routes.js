@@ -10,7 +10,7 @@ export const authRoutes = [
     },
     {
         path: LOGIN_ROUTE,
-        Component: AdminLogin
+        Component: Admin
     },
     {
         path: LENDING_ROUTE,
